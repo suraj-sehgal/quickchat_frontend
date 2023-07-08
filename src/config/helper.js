@@ -1,0 +1,1 @@
+export const BASE_URL="https://quickchatbackend-3u8x.onrender.com"
