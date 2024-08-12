@@ -79,8 +79,9 @@ const SideDrawer = () => {
             };
 
             const {data} = await axios.post('/api/chat',{userId},config);
-            if(!chats.find((c)=> c._id === data._id))
-            setSelectedChat([data, ...chats]);
+            if(!chats.find((c)=> c._id === data._id)){
+                setSelectedChat([data, ...chats]);
+            }
             setLoadingChat(false);
             onClose();
         } catch (error) {
@@ -114,8 +115,8 @@ const SideDrawer = () => {
                 </MenuButton>
                 <MenuList pl={2}>
                     {!notification.length &&  "No New Messages"}
-                    {notification.map((notif)=>( 
-                        <MenuItem key={notif._id} onClick={()=>{
+                    {notification.map((notif,index)=>( 
+                        <MenuItem key={index} onClick={()=>{
                             setSelectedChat(notif.chat);
                             setNotification(notification.filter((n)=> n!==notif));
                         }}>{notif.chat.isGroupChat?`New Message in ${notif.chat.chatName}`:`New Message from ${getSender(user,notif.chat.users)}`}</MenuItem>
@@ -148,8 +149,8 @@ const SideDrawer = () => {
                 <Button onClick={handleSearch}>Go</Button>
             </Box>
             {loading ? (<ChatLoading/>):(
-                searchResult?.map(user => (
-                    <UserListItem key={user.id} user={user} handleFunction={()=> accessChat(user._id)} />
+                searchResult?.map((user,index) => (
+                    <UserListItem key={index} user={user} handleFunction={()=> accessChat(user._id)} />
                 ))
             )}
             {loadingChat && <Spinner ml='auto' display='flex' />}

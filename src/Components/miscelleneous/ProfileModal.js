@@ -12,11 +12,11 @@ const { isOpen, onOpen, onClose } = useDisclosure()
       <Modal size="lg" isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize='40px' display='flex' justifyContent="center">{user.name}</ModalHeader>
+          <ModalHeader fontSize='40px' display='flex' justifyContent="center">{user?.name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody display='flex' flexDirection='column' alignItems='center' justifyContent='space-between'>
-            <Image borderRadius='full' boxSize="150px" src={user.pic} alt={user.name}/>
-            <Text fontSize={{ base: "28px" ,md:"30px"}} >Email:{user.email}</Text>
+            <Image borderRadius='full' boxSize="150px" src={user?.pic} alt={user?.name}/>
+            <Text fontSize={{ base: "28px" ,md:"30px"}} >Email:{user?.email}</Text>
           </ModalBody>
 
           <ModalFooter>
