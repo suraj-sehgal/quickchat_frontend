@@ -1,7 +1,8 @@
 import { Button, FormControl,useToast, FormLabel, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import ChatContext from '../../Context/ChatContext';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -12,8 +13,10 @@ const Login = () => {
     const handleClick = () => setShow(!show);
     const toast = useToast();
     let history=useHistory();
+    const {setUser}=useContext(ChatContext);
 
-
+    const baseUrl = process.env.REACT_APP_API_URL;
+    console.log(baseUrl);
 
     const submitHandler =async () => {
         setLoading(true);
@@ -35,8 +38,9 @@ const Login = () => {
                     "Content-type": "application/json",
                 },
             };
-            const {data} = await axios.post("/api/user/login",{email,password},config);
+            const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/user/login`,{email,password},config);
             localStorage.setItem("userInfo", JSON.stringify(data));
+            setUser(JSON.stringify(data));
             setLoading(false);
             toast({
                 title: 'Loggin Successfull.',

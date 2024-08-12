@@ -35,7 +35,7 @@ const UpdateChatGroupModel = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
                     Authorization: `Bearer ${user.token}`,
                 }
             };
-            const {data} = await axios.put('/api/chat/groupremove',{chatId:selectedChat._id, userId: removeUser._id},config);
+            const {data} = await axios.put(`${process.env.REACT_APP_API_URL}/api/chat/groupremove`,{chatId:selectedChat._id, userId: removeUser._id},config);
             removeUser._id===user._id?  setSelectedChat() : setSelectedChat (data) ;
             setFetchAgain(!fetchAgain);
             fetchMessages();
@@ -65,7 +65,7 @@ const UpdateChatGroupModel = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
                 }
             };
             
-            const {data}= await axios.put("/api/chat/rename",{chatId:selectedChat._id, chatName:groupChatName },config )
+            const {data}= await axios.put(`${process.env.REACT_APP_API_URL}/api/chat/rename`,{chatId:selectedChat._id, chatName:groupChatName },config )
             setSelectedChat(data);
             setFetchAgain(!fetchAgain);
             setRenameLoading(false);
@@ -103,7 +103,7 @@ const UpdateChatGroupModel = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
                 }
             };
 
-            const {data}= await axios.get(`/api/user?search=${search}`,config);
+            const {data}= await axios.get(`${process.env.REACT_APP_API_URL}/api/user?search=${search}`,config);
             console.log(data)
             setLoading(false);
             setSearchResult(data);
@@ -149,7 +149,7 @@ const UpdateChatGroupModel = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
                     Authorization: `Bearer ${user.token}`,
                 }
             };
-            const {data} = await axios.put("/api/chat/groupadd",{chatId: selectedChat._id, userId: addUser._id},config);
+            const {data} = await axios.put(`${process.env.REACT_APP_API_URL}/api/chat/groupadd`,{chatId: selectedChat._id, userId: addUser._id},config);
             setSelectedChat(data);
             setFetchAgain(!fetchAgain);
             setLoading(false);

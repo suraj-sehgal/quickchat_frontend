@@ -38,7 +38,7 @@ const SingleChats = ({fetchAgain,setFetchAgain}) => {
                 }
             };
             
-            const {data}=await axios.get(`/api/message/${selectedChat?._id}`,config);
+            const {data}=await axios.get(`${process.env.REACT_APP_API_URL}/api/message/${selectedChat?._id}`,config);
             // console.log(data);
             setMessages(data);
             setLoading(false);
@@ -99,7 +99,7 @@ const SingleChats = ({fetchAgain,setFetchAgain}) => {
                     }
                 };
                 setNewMessage("");
-                const {data} = await axios.post("/api/message/",{content: newMessage, chatId: selectedChat._id},config);
+                const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/message/`,{content: newMessage, chatId: selectedChat._id},config);
                 setMessages([...messages,data]);
                 // socket.emit("new message",data);
 

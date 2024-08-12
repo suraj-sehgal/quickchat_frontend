@@ -1,7 +1,9 @@
 import { Button, FormControl,useToast, FormLabel, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import ChatContext from '../../Context/ChatContext';
+
 
 const SignUp = () => {
     const [name, setName] = useState();
@@ -15,6 +17,8 @@ const SignUp = () => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
     let history = useHistory();
+
+    const {setUser}= useContext(ChatContext);
 
     const postDetails = (pics) => {
         setLoading(true);
@@ -92,7 +96,7 @@ const SignUp = () => {
                     "Content-type": "application/json",
                 },
             };
-            const {data} = await axios.post("/api/user",{name,email,password,pic},config);
+            const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/user`,{name,email,password,pic},config);
 
             toast({
                 title: 'Registration Successfull.',
@@ -102,6 +106,8 @@ const SignUp = () => {
                 position:"bottom",
             })
             localStorage.setItem("userInfo", JSON.stringify(data));
+            setUser(JSON.stringify(data));
+
             setLoading(false);
             history.push("/chats");
 

@@ -30,8 +30,7 @@ const GroupChat = ({children}) => {
                 }
             };
 
-            const {data}= await axios.get(`/api/user?search=${search}`,config);
-            console.log(data)
+            const {data}= await axios.get(`${process.env.REACT_APP_API_URL}/api/user?search=${search}`,config);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -66,7 +65,7 @@ const GroupChat = ({children}) => {
                 }
             };
 
-            const {data}=await axios.post("/api/chat/group",{name:groupChatName, users:JSON.stringify(selectedUser.map((u)=> u._id)),},config);
+            const {data}=await axios.post(`${process.env.REACT_APP_API_URL}/api/chat/group`,{name:groupChatName, users:JSON.stringify(selectedUser.map((u)=> u._id)),},config);
             setChats([data,...chats]);
             onClose();
 
@@ -126,14 +125,14 @@ const GroupChat = ({children}) => {
                 </FormControl>
                 <Box display="flex" w="100%" flexWrap="wrap">
                 {/* selected users */}
-                {selectedUser.map((u)=>(
-                    <UserBadgeItem key={user._id} user={u} handleFunction={()=>handleDelete(u)}  />
+                {selectedUser.map((u,index)=>(
+                    <UserBadgeItem key={index} user={u} handleFunction={()=>handleDelete(u)}  />
                 ))}
                 </Box>
                 {/* render searched users */}
                 {loading ? <div>loading</div> : (
-                    searchResult?.slice(0,4).map((user) =>(
-                        <UserListItem key={user._id} user={user} handleFunction={()=>handleGroup(user)} />
+                    searchResult?.slice(0,4).map((user,index) =>(
+                        <UserListItem key={index} user={user} handleFunction={()=>handleGroup(user)} />
                     ))
                 )}
                 
