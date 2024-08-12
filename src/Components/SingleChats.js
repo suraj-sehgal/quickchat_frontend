@@ -9,16 +9,17 @@ import axios from 'axios';
 import './styles.css';
 import ScrollableChat from './ScrollableChat';
 
-import io from "socket.io-client";
-const ENDPOINT = "http://localhost:5000";
-var socket, selectedChatCompare;
+// import io from "socket.io-client";
+// const ENDPOINT = "http://localhost:5000";
+// var socket;
+var selectedChatCompare;
 
 const SingleChats = ({fetchAgain,setFetchAgain}) => {
 
     const [messages,setMessages] =useState([]);
     const [loading,setLoading]= useState(false);
     const [newMessage,setNewMessage]= useState("");
-    const [socketConnected,setSocketConnected] = useState();
+    // const [socketConnected,setSocketConnected] = useState();
     const [typing,setTyping] = useState(false);
     const [isTyping,setIsTyping] = useState(false);
     const toast = useToast();

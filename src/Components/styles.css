@@ -5,10 +5,3 @@
     scrollbar-width: none;
 }
 
-#chatRoom {
-    background-image: url("../chatRoomBg.jpg");
-    background-size: cover;
-  background-position: center;
-  
-  background-image: linear-gradient(to bottom right);
-}
