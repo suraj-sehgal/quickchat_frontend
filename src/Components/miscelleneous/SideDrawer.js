@@ -111,9 +111,12 @@ const SideDrawer = () => {
         <Text fontSize='2xl' fontFamily='Work sans'>QuickChat</Text>
         <div>
             <Menu>
-                <MenuButton p={1}>
+                <MenuButton  p={1}>
                     {/* <NotificationBadge count={notification.length} effect={Effect.SCALE} />  */}
-                    <BellIcon fontSize="2xl" m={1} />
+                    <Box position={'relative'} padding={1} marginRight={4} borderRadius={'50%'} bgColor={'#C0C0C0'}>
+                        <Box pos={'absolute'} top={0} fontSize={20} right={1}>{notification.length>0?notification.length:""}</Box>
+                        <BellIcon fontSize="2xl" m={1} />
+                    </Box>
                 </MenuButton>
                 <MenuList pl={2}>
                     {!notification.length &&  "No New Messages"}
