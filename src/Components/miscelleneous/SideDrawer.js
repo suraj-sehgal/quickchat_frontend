@@ -16,12 +16,14 @@ const SideDrawer = () => {
     const [searchResult,setSearchResult] = useState([]);
     const [loading,setLoading] = useState(false);
     const [loadingChat,setLoadingChat] = useState(false);
+    const [loginUser,setLoginUser]=useState();
 
     const context = useContext(ChatContext);
     const {user,setSelectedChat,chats,notification,setNotification}=context;
-
+    console.log(user);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const toast = useToast();
+    
 
     const history = useHistory();
     const LogOutHandler = ()=>{
@@ -98,7 +100,7 @@ const SideDrawer = () => {
     }
 
   return( 
-    <>
+    <Box>
       <Box display='flex'justifyContent='space-between' bg='white' w='100%' p="5px 10px 5px 10px" borderWidth="5px">
         <Tooltip label="Search Users to chat" hasArrow placement='bottom-end'>
             <Button variant="ghost" onClick={onOpen}>
@@ -109,10 +111,10 @@ const SideDrawer = () => {
         <Text fontSize='2xl' fontFamily='Work sans'>QuickChat</Text>
         <div>
             <Menu>
-                {/* <MenuButton p={1}>
-                    <NotificationBadge count={notification.length} effect={Effect.SCALE} /> 
+                <MenuButton p={1}>
+                    {/* <NotificationBadge count={notification.length} effect={Effect.SCALE} />  */}
                     <BellIcon fontSize="2xl" m={1} />
-                </MenuButton> */}
+                </MenuButton>
                 <MenuList pl={2}>
                     {!notification.length &&  "No New Messages"}
                     {notification.map((notif,index)=>( 
@@ -137,6 +139,7 @@ const SideDrawer = () => {
             </Menu>
         </div>
       </Box>
+
       <Drawer isOpen={isOpen} placement='left' onClose={onClose} >
         <DrawerOverlay />
         <DrawerContent>
@@ -157,7 +160,7 @@ const SideDrawer = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-    </>
+    </Box>
     );
 };
 

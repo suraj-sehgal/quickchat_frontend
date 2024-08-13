@@ -9,7 +9,6 @@ const ChatPage = () => {
 const context = useContext(ChatContext);
 const [fetchAgain,setFetchAgain]= useState(false);
 const {user} = context;
-
     return (
         <div  style={{width:"100%"}}>
             {user && <SideDrawer/>}

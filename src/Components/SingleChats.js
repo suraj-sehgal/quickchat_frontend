@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ChatContext from '../Context/ChatContext'
-import { Box,FormControl,IconButton,Input,Spinner,Text, useToast } from '@chakra-ui/react';
+import { Box,Button,FormControl,IconButton,Input,Spinner,Text, useToast } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { getSender,getSenderFull } from '../config/ChatLogics';
 import ProfileModal from './miscelleneous/ProfileModal';
@@ -8,6 +8,7 @@ import UpdateChatGroupModel from './miscelleneous/UpdateChatGroupModel';
 import axios from 'axios';
 import './styles.css';
 import ScrollableChat from './ScrollableChat';
+import { IoIosSend } from "react-icons/io";
 
 import io from "socket.io-client";
 const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
@@ -168,9 +169,12 @@ const SingleChats = ({fetchAgain,setFetchAgain}) => {
                   </div>
                   )}
 
-                <FormControl onKeyDown={sendMessage} isRequired mt={3}>
+                <FormControl pos={'relative'} onKeyDown={sendMessage} isRequired mt={3}>
                     {isTyping && <div>Typing...</div>}
                     <Input variant='filled' bg='#E0E0E0' onChange={typingHandler} color='black' value={newMessage} placeholder='Enter Message..'/>
+                    <Button variant={'none'} pos={'absolute'} _hover={{transform: 'scale(1.2)',transition: 'transform 0.2s ease-in-out'}} right={5} bottom='2px' onClick={sendMessage}>
+                        <IoIosSend  size={30} color='#606060'/>
+                    </Button>
                 </FormControl>
             </Box>
         </>
